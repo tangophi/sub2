@@ -1,0 +1,43 @@
+name: Link PDR PR to Submodule PR
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+    branches:
+      - main
+
+jobs:
+  link-pdr-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout submodule repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jq
+
+      - name: Find PDR PR and update this PR body
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -e
+          sub_repo="${{ github.repository }}"
+          sub_name=$(basename "$sub_repo")
+          head_sha="${{ github.event.pull_request.head.sha }}"
+
+          pdr_pr_num=$(gh pr list \
+            --repo tangophi/parent_repo \
+            --state open \
+            --json number,headRefOid \
+            --jq ".[] | select(.headRefOid==\"$head_sha\") | .number" || true)
+
+          if [ -n "$pdr_pr_num" ]; then
+            pdr_url="https://github.com/tangophi/parent_repo/pull/$pdr_pr_num"
+            body=$(gh pr view ${{ github.event.pull_request.number }} --json body --jq '.body')
+            new_body="$body"$'\n\n'"Linked PDR PR: $pdr_url"
+            gh pr edit ${{ github.event.pull_request.number }} --body "$new_body"
+          fi
