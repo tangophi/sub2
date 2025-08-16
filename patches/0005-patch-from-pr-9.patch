@@ -1,0 +1,62 @@
+From 737d06bc7dd8617d9f06ddad1e65afeb0877bf01 Mon Sep 17 00:00:00 2001
+From: Gopinath Marappan <gopinath.marappan@gmail.com>
+Date: Sat, 16 Aug 2025 17:36:38 +0530
+Subject: [PATCH 1/2] Added a comment to bdev_write_inode()
+
+---
+ block/bdev.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/block/bdev.c b/block/bdev.c
+index 69c1c2d..206cf53 100644
+--- a/block/bdev.c
++++ b/block/bdev.c
+@@ -46,6 +46,7 @@ struct block_device *I_BDEV(struct inode *inode)
+ }
+ EXPORT_SYMBOL(I_BDEV);
+ 
++/* Inode writeback */
+ static void bdev_write_inode(struct block_device *bdev)
+ {
+ 	struct inode *inode = bdev->bd_inode;
+-- 
+2.50.1
+
+
+From bbc026c977268ea2a3095365cf64637fa2bcec1e Mon Sep 17 00:00:00 2001
+From: Gopinath Marappan <gopinath.marappan@gmail.com>
+Date: Sat, 16 Aug 2025 17:38:56 +0530
+Subject: [PATCH 2/2] Removed a comment from sanity_check_segment_list in
+ kernel/kexec_core.c and added a line to build/Makefile
+
+---
+ kernel/kexec_core.c | 13 -------------
+ 1 file changed, 13 deletions(-)
+
+diff --git a/kernel/kexec_core.c b/kernel/kexec_core.c
+index 2fda256..85a0107 100644
+--- a/kernel/kexec_core.c
++++ b/kernel/kexec_core.c
+@@ -135,19 +135,6 @@ int sanity_check_segment_list(struct kimage *image)
+ 	unsigned long total_pages = 0;
+ 	unsigned long nr_pages = totalram_pages();
+ 
+-	/*
+-	 * Verify we have good destination addresses.  The caller is
+-	 * responsible for making certain we don't attempt to load
+-	 * the new image into invalid or reserved areas of RAM.  This
+-	 * just verifies it is an address we can use.
+-	 *
+-	 * Since the kernel does everything in page size chunks ensure
+-	 * the destination addresses are page aligned.  Too many
+-	 * special cases crop of when we don't do this.  The most
+-	 * insidious is getting overlapping destination addresses
+-	 * simply because addresses are changed to page size
+-	 * granularity.
+-	 */
+ 	for (i = 0; i < nr_segments; i++) {
+ 		unsigned long mstart, mend;
+ 
+-- 
+2.50.1
+
