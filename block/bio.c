@@ -46,6 +46,7 @@ static struct biovec_slab {
 	{ .nr_vecs = BIO_MAX_VECS, .name = "biovec-max" },
 };
 
+//new line
 static struct biovec_slab *biovec_slab(unsigned short nr_vecs)
 {
 	switch (nr_vecs) {
@@ -103,6 +104,7 @@ static struct bio_slab *create_bio_slab(unsigned int size)
 	if (!xa_err(xa_store(&bio_slabs, size, bslab, GFP_KERNEL)))
 		return bslab;
 
+	//one more new line
 	kmem_cache_destroy(bslab->slab);
 
 fail_alloc_slab:
