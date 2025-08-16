@@ -1,0 +1,119 @@
+From 59fd63e3ec4a4a7307282dccfc5b03f6330628a6 Mon Sep 17 00:00:00 2001
+From: Gopinath Marappan <gopinath.marappan@gmail.com>
+Date: Sat, 16 Aug 2025 10:29:03 +0530
+Subject: [PATCH] Remove link_prs.yml file and some changes
+
+---
+ .github/workflows/link_prs.yml.to-be-deleted | 66 --------------------
+ block/bio.c                                  |  2 +
+ kernel/kexec_core.c                          |  1 +
+ 3 files changed, 3 insertions(+), 66 deletions(-)
+ delete mode 100644 .github/workflows/link_prs.yml.to-be-deleted
+
+diff --git a/.github/workflows/link_prs.yml.to-be-deleted b/.github/workflows/link_prs.yml.to-be-deleted
+deleted file mode 100644
+index 08d41ae..0000000
+--- a/.github/workflows/link_prs.yml.to-be-deleted
++++ /dev/null
+@@ -1,66 +0,0 @@
+-name: Link PDR PR
+-
+-on:
+-  pull_request:
+-    types: [opened, reopened, synchronize]
+-  schedule:
+-    - cron: '*/15 * * * *'
+-
+-jobs:
+-  link-prs:
+-    runs-on: ubuntu-latest
+-    steps:
+-      - name: Checkout code
+-        uses: actions/checkout@v3
+-
+-      - name: Link PDR PR
+-        env:
+-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+-          SUBMODULE_REPO: ${{ github.repository }}
+-          PDR_REPO: "tangophi/parent_repo" # Replace with the actual parent repo
+-        run: |
+-          # Function to get PRs from a repo by branch name
+-          get_pr_url() {
+-            repo=$1
+-            branch=$2
+-            pr_url=$(gh pr list -R "$repo" --head "$branch" --json url -q '.[0].url')
+-            echo "$pr_url"
+-          }
+-
+-          # Function to update PR description
+-          update_pr_description() {
+-            pr_number=$1
+-            pr_body=$2
+-            new_link=$3
+-            existing_links=$(echo "$pr_body" | grep -o "https://github.com/.*")
+-            
+-            if ! echo "$existing_links" | grep -q "$new_link"; then
+-              new_body="$pr_body\n\n**Related PRs:**\n$new_link"
+-              gh pr edit "$pr_number" -R "$SUBMODULE_REPO" --body "$new_body"
+-            fi
+-          }
+-
+-          if [ "${{ github.event_name }}" == "pull_request" ]; then
+-            pr_number=${{ github.event.pull_request.number }}
+-            pr_body="${{ github.event.pull_request.body }}"
+-            branch=${{ github.event.pull_request.head.ref }}
+-            
+-            pdr_pr_url=$(get_pr_url "$PDR_REPO" "$branch")
+-            
+-            if [ -n "$pdr_pr_url" ]; then
+-              update_pr_description "$pr_number" "$pr_body" "$pdr_pr_url"
+-            fi
+-          else # schedule
+-            prs=$(gh pr list -R "$SUBMODULE_REPO" --json number,body,headRefName)
+-            echo "$prs" | while IFS= read -r pr; do
+-              pr_number=$(echo "$pr" | jq -r '.number')
+-              pr_body=$(echo "$pr" | jq -r '.body')
+-              branch=$(echo "$pr" | jq -r '.headRefName')
+-
+-              pdr_pr_url=$(get_pr_url "$PDR_REPO" "$branch")
+-
+-              if [ -n "$pdr_pr_url" ]; then
+-                update_pr_description "$pr_number" "$pr_body" "$pdr_pr_url"
+-              fi
+-            done
+-          fi
+diff --git a/block/bio.c b/block/bio.c
+index 4a8e761..62545bd 100644
+--- a/block/bio.c
++++ b/block/bio.c
+@@ -46,6 +46,7 @@ static struct biovec_slab {
+ 	{ .nr_vecs = BIO_MAX_VECS, .name = "biovec-max" },
+ };
+ 
++//new line
+ static struct biovec_slab *biovec_slab(unsigned short nr_vecs)
+ {
+ 	switch (nr_vecs) {
+@@ -103,6 +104,7 @@ static struct bio_slab *create_bio_slab(unsigned int size)
+ 	if (!xa_err(xa_store(&bio_slabs, size, bslab, GFP_KERNEL)))
+ 		return bslab;
+ 
++	//one more new line
+ 	kmem_cache_destroy(bslab->slab);
+ 
+ fail_alloc_slab:
+diff --git a/kernel/kexec_core.c b/kernel/kexec_core.c
+index a0e8bf3..2fda256 100644
+--- a/kernel/kexec_core.c
++++ b/kernel/kexec_core.c
+@@ -6,6 +6,7 @@
+ 
+ #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+ 
++// added line
+ #include <linux/btf.h>
+ #include <linux/capability.h>
+ #include <linux/mm.h>
+-- 
+2.50.1
+
