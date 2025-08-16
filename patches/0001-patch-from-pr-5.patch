@@ -1,0 +1,24 @@
+From eb02b32b6778506a0fce11044f03302269d596f6 Mon Sep 17 00:00:00 2001
+From: Gopinath Marappan <gopinath.marappan@gmail.com>
+Date: Sat, 16 Aug 2025 08:37:32 +0530
+Subject: [PATCH] test to see if patches are created on merge is sub2 - 2nd try
+
+---
+ kernel/kexec.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/kernel/kexec.c b/kernel/kexec.c
+index 30e2601..f1d18be 100644
+--- a/kernel/kexec.c
++++ b/kernel/kexec.c
+@@ -21,6 +21,7 @@
+ // on merge
+ //
+ //
++// Added a ne wline now
+ #include "kexec_internal.h"
+ 
+ static int kimage_alloc_init(struct kimage **rimage, unsigned long entry,
+-- 
+2.50.1
+
