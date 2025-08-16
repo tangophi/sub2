@@ -17,6 +17,10 @@
 #include <linux/vmalloc.h>
 #include <linux/slab.h>
 
+// Added this line to test if patches are created
+// on merge
+//
+//
 #include "kexec_internal.h"
 
 static int kimage_alloc_init(struct kimage **rimage, unsigned long entry,
