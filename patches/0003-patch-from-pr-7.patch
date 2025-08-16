@@ -1,0 +1,45 @@
+From fb5d7c93a26e3e51159c571765f94778b0900eb3 Mon Sep 17 00:00:00 2001
+From: Gopinath Marappan <gopinath.marappan@gmail.com>
+Date: Sat, 16 Aug 2025 10:04:22 +0530
+Subject: [PATCH] Disabled link_prs.yml in submodules
+
+---
+ .github/workflows/{link_prs.yml => link_prs.yml.to-be-deleted} | 0
+ block/blk.h                                                    | 1 +
+ kernel/kexec_file.c                                            | 3 +++
+ 3 files changed, 4 insertions(+)
+ rename .github/workflows/{link_prs.yml => link_prs.yml.to-be-deleted} (100%)
+
+diff --git a/.github/workflows/link_prs.yml b/.github/workflows/link_prs.yml.to-be-deleted
+similarity index 100%
+rename from .github/workflows/link_prs.yml
+rename to .github/workflows/link_prs.yml.to-be-deleted
+diff --git a/block/blk.h b/block/blk.h
+index 608b36d..f770ce0 100644
+--- a/block/blk.h
++++ b/block/blk.h
+@@ -7,6 +7,7 @@
+ #include <xen/xen.h>
+ #include "blk-crypto-internal.h"
+ 
++// added this line
+ struct elevator_type;
+ 
+ /* Max future timer expiry for timeouts */
+diff --git a/kernel/kexec_file.c b/kernel/kexec_file.c
+index b8c6a79..14dca9f 100644
+--- a/kernel/kexec_file.c
++++ b/kernel/kexec_file.c
+@@ -29,6 +29,9 @@
+ #include <linux/vmalloc.h>
+ #include "kexec_internal.h"
+ 
++
++// Added this line
++
+ #ifdef CONFIG_KEXEC_SIG
+ static bool sig_enforce = IS_ENABLED(CONFIG_KEXEC_SIG_FORCE);
+ 
+-- 
+2.50.1
+
