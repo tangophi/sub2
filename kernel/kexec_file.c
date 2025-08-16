@@ -29,6 +29,9 @@
 #include <linux/vmalloc.h>
 #include "kexec_internal.h"
 
+
+// Added this line
+
 #ifdef CONFIG_KEXEC_SIG
 static bool sig_enforce = IS_ENABLED(CONFIG_KEXEC_SIG_FORCE);
 

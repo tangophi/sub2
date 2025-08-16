@@ -7,6 +7,7 @@
 #include <xen/xen.h>
 #include "blk-crypto-internal.h"
 
+// added this line
 struct elevator_type;
 
 /* Max future timer expiry for timeouts */
