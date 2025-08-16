@@ -135,19 +135,6 @@ int sanity_check_segment_list(struct kimage *image)
 	unsigned long total_pages = 0;
 	unsigned long nr_pages = totalram_pages();
 
-	/*
-	 * Verify we have good destination addresses.  The caller is
-	 * responsible for making certain we don't attempt to load
-	 * the new image into invalid or reserved areas of RAM.  This
-	 * just verifies it is an address we can use.
-	 *
-	 * Since the kernel does everything in page size chunks ensure
-	 * the destination addresses are page aligned.  Too many
-	 * special cases crop of when we don't do this.  The most
-	 * insidious is getting overlapping destination addresses
-	 * simply because addresses are changed to page size
-	 * granularity.
-	 */
 	for (i = 0; i < nr_segments; i++) {
 		unsigned long mstart, mend;
 
