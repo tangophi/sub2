@@ -21,6 +21,7 @@
 // on merge
 //
 //
+// Added a ne wline now
 #include "kexec_internal.h"
 
 static int kimage_alloc_init(struct kimage **rimage, unsigned long entry,
