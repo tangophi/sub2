@@ -24,6 +24,8 @@
 // Added a ne wline now
 #include "kexec_internal.h"
 
+// Added a new line here now
+//
 static int kimage_alloc_init(struct kimage **rimage, unsigned long entry,
 			     unsigned long nr_segments,
 			     struct kexec_segment *segments,
