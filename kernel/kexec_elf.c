@@ -21,6 +21,8 @@
 #include <linux/slab.h>
 #include <linux/types.h>
 
+// adf
+
 static inline bool elf_is_elf_file(const struct elfhdr *ehdr)
 {
 	return memcmp(ehdr->e_ident, ELFMAG, SELFMAG) == 0;
