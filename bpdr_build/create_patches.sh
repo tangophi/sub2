@@ -62,7 +62,7 @@ for id in "${!commit_groups[@]}"; do
     first_commit_msg="${first_commit_messages[$id]}"
 
     # Sanitize the commit message for the filename
-    sanitized_msg=$(echo "$first_commit_msg" | sed 's/[]//g' | sed 's/[^a-zA-Z0-9._-]/_/g')
+    sanitized_msg=$(echo "$first_commit_msg" | sed -e 's/[[]//g' | sed -e 's/[]]//g' | sed 's/[^a-zA-Z0-9._-]/_/g')
 
     # Construct the patch filename
     patch_filename=$(printf "%04d-%s.patch" "$next_patch_num" "$sanitized_msg")
