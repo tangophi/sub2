@@ -112,6 +112,9 @@ fail_alloc_slab:
 	return NULL;
 }
 
+// inidivdual patches
+// adf
+//
 static inline unsigned int bs_bio_slab_size(struct bio_set *bs)
 {
 	return bs->front_pad + sizeof(struct bio) + bs->back_pad;

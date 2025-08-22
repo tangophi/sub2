@@ -127,6 +127,7 @@ EXPORT_SYMBOL_GPL(kexec_crash_loaded);
 static struct page *kimage_alloc_page(struct kimage *image,
 				       gfp_t gfp_mask,
 				       unsigned long dest);
+// third changes
 
 int sanity_check_segment_list(struct kimage *image)
 {

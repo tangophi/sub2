@@ -26,6 +26,7 @@
 
 // Added a new line here now
 //
+// third changes
 static int kimage_alloc_init(struct kimage **rimage, unsigned long entry,
 			     unsigned long nr_segments,
 			     struct kexec_segment *segments,
