@@ -32,7 +32,7 @@
 
 // Added this line
 // second individual patches changes
-
+// asdf
 #ifdef CONFIG_KEXEC_SIG
 static bool sig_enforce = IS_ENABLED(CONFIG_KEXEC_SIG_FORCE);
 
