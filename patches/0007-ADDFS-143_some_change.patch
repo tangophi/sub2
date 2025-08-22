@@ -1,0 +1,25 @@
+From 68671eb4efd84f2387c0c0ec6ca7d4209bc4afa7 Mon Sep 17 00:00:00 2001
+From: Gopinath Marappan <gopinath.marappan@gmail.com>
+Date: Fri, 22 Aug 2025 16:35:52 +0530
+Subject: [PATCH] [ADDFS-143] some change
+
+---
+ kernel/kexec_file.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/kernel/kexec_file.c b/kernel/kexec_file.c
+index 8233be2..8236c07 100644
+--- a/kernel/kexec_file.c
++++ b/kernel/kexec_file.c
+@@ -32,7 +32,7 @@
+ 
+ // Added this line
+ // second individual patches changes
+-
++// asdf
+ #ifdef CONFIG_KEXEC_SIG
+ static bool sig_enforce = IS_ENABLED(CONFIG_KEXEC_SIG_FORCE);
+ 
+-- 
+2.51.0
+

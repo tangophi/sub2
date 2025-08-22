@@ -1,0 +1,38 @@
+From c64b9206707d6998859301d2be2226ce6a6b03d1 Mon Sep 17 00:00:00 2001
+From: Gopinath Marappan <gopinath.marappan@gmail.com>
+Date: Wed, 20 Aug 2025 14:28:57 +0530
+Subject: [PATCH] [PAR-768] changes to block/bdev.c and kernel/kexec_file.c -
+ second patch
+
+---
+ block/bdev.c        | 1 +
+ kernel/kexec_file.c | 1 +
+ 2 files changed, 2 insertions(+)
+
+diff --git a/block/bdev.c b/block/bdev.c
+index 206cf53..8603c17 100644
+--- a/block/bdev.c
++++ b/block/bdev.c
+@@ -46,6 +46,7 @@ struct block_device *I_BDEV(struct inode *inode)
+ }
+ EXPORT_SYMBOL(I_BDEV);
+ 
++// second individual patch changes
+ /* Inode writeback */
+ static void bdev_write_inode(struct block_device *bdev)
+ {
+diff --git a/kernel/kexec_file.c b/kernel/kexec_file.c
+index 14dca9f..8233be2 100644
+--- a/kernel/kexec_file.c
++++ b/kernel/kexec_file.c
+@@ -31,6 +31,7 @@
+ 
+ 
+ // Added this line
++// second individual patches changes
+ 
+ #ifdef CONFIG_KEXEC_SIG
+ static bool sig_enforce = IS_ENABLED(CONFIG_KEXEC_SIG_FORCE);
+-- 
+2.51.0
+
